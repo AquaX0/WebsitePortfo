@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="src/output.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Documents</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .content-container {
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), 
+                        opacity 1s ease-out;
+        }
+        
+        .loaded .content-container {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f3f4f6;
+            z-index: 9998;
+            pointer-events: none;
+            transform: translateY(0);
+            transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        
+        header {
+            position: relative;
+            z-index: 10000;
+        }
+        
+        .no-js .content-container {
+            transform: none;
+            opacity: 1;
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 100%;
+            background-color: black;
+            padding: 1rem;
+            z-index: 1000;
+        }
+        
+        .mobile-menu.active {
+            display: block;
+        }
+        
+        .mobile-menu a {
+            display: block;
+            padding: 0.75rem 0;
+            color: white;
+            text-align: center;
+        }
+        
+        .mobile-menu a:hover {
+            color: #60a5fa;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            position: relative;
+        }
+        
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: white;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+        
+        .hamburger span:nth-child(1) {
+            top: 0px;
+        }
+        
+        .hamburger span:nth-child(2), .hamburger span:nth-child(3) {
+            top: 8px;
+        }
+        
+        .hamburger span:nth-child(4) {
+            top: 16px;
+        }
+        
+        .hamburger.open span:nth-child(1) {
+            top: 8px;
+            width: 0%;
+            left: 50%;
+        }
+        
+        .hamburger.open span:nth-child(2) {
+            transform: rotate(45deg);
+        }
+        
+        .hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+        
+        .hamburger.open span:nth-child(4) {
+            top: 8px;
+            width: 0%;
+            left: 50%;
+        }
+        
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-black text-white relative">
+        <nav class="w-full flex justify-between items-center px-4 py-4">
+            <p class="font-bold text-lg">My portfolio website</p>
+            <div class="desktop-nav flex space-x-6">
+                <a href="index.html" class="hover:text-blue-400 transition">About Me</a>
+                <a href="Projects.html" class="hover:text-blue-400 transition">Projects</a>
+                <a href="Contacts.html" class="hover:text-blue-400 transition">Contacts</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html" class="hover:text-blue-400 transition">About Me</a>
+            <a href="Projects.html" class="hover:text-blue-400 transition">Projects</a>
+            <a href="Contacts.html" class="hover:text-blue-400 transition">Contacts</a>
+        </div>
+    </header>  
+    <div class="content-container container max-w-5xl mx-auto px-4 sm:px-6 my-4 sm:my-8">
+        <div class="bg-white rounded-2xl overflow-hidden">
+            <div class="bg-blue-600 text-white px-4 py-6 md:px-7 md:p-10">
+                <h2 class="text-3xl md:text-5xl flex items-center">
+                    <b>Projects</b>
+                </h2>
+            </div>
+            <div class="space-y-4 md:py-5 md:px-4 py-3 px-3">
+                <a href="https://github.com/steljchan/Baju-Kita" class="flex flex-col md:flex-row gap-4 items-center hover:bg-gray-100 p-4 rounded-lg transition">
+                    <div class="w-20 h-20 flex-shrink-0 rounded-xl overflow-hidden border-2 border-gray-200">
+                        <img src="src/pictures/BajuKita.png" alt="Logo BajuKita" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-grow">
+                        <h3 class="text-xl font-bold">BajuKita</h3>
+                        <p class="text-gray-600">A prototype mobile app developed by my group as our final project for the semester.</p>
+                    </div>
+                </a>
+                <a href="https://github.com/AquaX0/Blackjack" class="flex flex-col md:flex-row gap-4 items-center hover:bg-gray-100 p-4 rounded-lg transition">
+                    <div class="w-20 h-20 flex-shrink-0 rounded-xl overflow-hidden border-2 border-gray-200">
+                        <img src="src/pictures/Blackjack.jpeg" alt="Blackjack" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-grow">
+                        <h3 class="text-xl font-bold">Blackjack Game</h3>
+                        <p class="text-gray-600">A Python implementation of the classic card game Blackjack.</p>
+                    </div>
+                </a>
+                <a href="https://github.com/AquaX0/GuessTheNumberGame" class="flex flex-col md:flex-row gap-4 items-center hover:bg-gray-100 p-4 rounded-lg transition">
+                    <div class="w-20 h-20 flex-shrink-0 rounded-xl overflow-hidden border-2 border-gray-200">
+                        <img src="src/pictures/Number.webp" alt="Guess The Number" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-grow">
+                        <h3 class="text-xl font-bold">Guess The Number Game</h3>
+                        <p class="text-gray-600">A simple number guessing game implemented in Java.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <footer class="bg-gray-200 p-4 text-center text-sm text-gray-500 border-t border-gray-200 rounded-b-2xl">
+            <p>Designed with Tailwind CSS | © 2025 Britney Glory Chen</p>
+        </footer>
+    </div>
+    <script>
+        document.body.classList.remove('no-js');
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const transitionEl = document.createElement('div');
+            transitionEl.className = 'page-transition';
+            document.body.appendChild(transitionEl);
+            
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+                transitionEl.style.transform = 'translateY(-100%)';
+                setTimeout(() => {
+                    transitionEl.remove();
+                }, 1200); 
+            }, 50);
+        });
+        
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (link.href && link.href !== '#' && !link.href.includes('#')) {
+                    e.preventDefault();
+                    const transitionEl = document.createElement('div');
+                    transitionEl.className = 'page-transition';
+                    transitionEl.style.transform = 'translateY(100%)';
+                    document.body.appendChild(transitionEl);
+                    
+                    setTimeout(() => {
+                        transitionEl.style.transform = 'translateY(0)';
+                        setTimeout(() => {
+                            window.location.href = link.href;
+                        }, 1200); 
+                    }, 50);
+                }
+            });
+        });
+    </script>
+    <script>
+        document.body.classList.remove('no-js');
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const transitionEl = document.createElement('div');
+            transitionEl.className = 'page-transition';
+            document.body.appendChild(transitionEl);
+            
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+                transitionEl.style.transform = 'translateY(-100%)';
+                setTimeout(() => {
+                    transitionEl.remove();
+                }, 1200); 
+            }, 50);
+            
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('open');
+                mobileMenu.classList.toggle('active');
+            });
+            
+            document.querySelectorAll('#mobileMenu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('open');
+                    mobileMenu.classList.remove('active');
+                });
+            });
+        });
+        
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (link.href && link.href !== '#' && !link.href.includes('#')) {
+                    e.preventDefault();
+                    const transitionEl = document.createElement('div');
+                    transitionEl.className = 'page-transition';
+                    transitionEl.style.transform = 'translateY(100%)';
+                    document.body.appendChild(transitionEl);
+                    
+                    setTimeout(() => {
+                        transitionEl.style.transform = 'translateY(0)';
+                        setTimeout(() => {
+                            window.location.href = link.href;
+                        }, 1200); 
+                    }, 50);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

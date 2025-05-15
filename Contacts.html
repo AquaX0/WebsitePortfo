@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="src/output.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Documents</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            20% { transform: rotate(5deg); }
+            40% { transform: rotate(-5deg); }
+            60% { transform: rotate(5deg); }
+            80% { transform: rotate(-5deg); }
+        }
+        .animate-shake {
+            animation: shake 0.5s ease-in-out infinite;
+        }
+
+        .content-container {
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), 
+                        opacity 1s ease-out;
+        }
+        
+        .loaded .content-container {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f3f4f6;
+            z-index: 9998;
+            pointer-events: none;
+            transform: translateY(0);
+            transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        
+        header {
+            position: relative;
+            z-index: 10000;
+        }
+        
+        .no-js .content-container {
+            transform: none;
+            opacity: 1;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 100%;
+            background-color: black;
+            padding: 1rem;
+            z-index: 1000;
+        }
+        
+        .mobile-menu.active {
+            display: block;
+        }
+        
+        .mobile-menu a {
+            display: block;
+            padding: 0.75rem 0;
+            color: white;
+            text-align: center;
+        }
+        
+        .mobile-menu a:hover {
+            color: #60a5fa;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            position: relative;
+        }
+        
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: white;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+        
+        .hamburger span:nth-child(1) {
+            top: 0px;
+        }
+        
+        .hamburger span:nth-child(2), .hamburger span:nth-child(3) {
+            top: 8px;
+        }
+        
+        .hamburger span:nth-child(4) {
+            top: 16px;
+        }
+        
+        .hamburger.open span:nth-child(1) {
+            top: 8px;
+            width: 0%;
+            left: 50%;
+        }
+        
+        .hamburger.open span:nth-child(2) {
+            transform: rotate(45deg);
+        }
+        
+        .hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+        
+        .hamburger.open span:nth-child(4) {
+            top: 8px;
+            width: 0%;
+            left: 50%;
+        }
+        
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-black text-white relative">
+        <nav class="w-full flex justify-between items-center px-4 py-4">
+            <p class="font-bold text-lg">My portfolio website</p>
+            <div class="desktop-nav flex space-x-6">
+                <a href="index.html" class="hover:text-blue-400 transition">About Me</a>
+                <a href="Projects.html" class="hover:text-blue-400 transition">Projects</a>
+                <a href="Contacts.html" class="hover:text-blue-400 transition">Contacts</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html" class="hover:text-blue-400 transition">About Me</a>
+            <a href="Projects.html" class="hover:text-blue-400 transition">Projects</a>
+            <a href="Contacts.html" class="hover:text-blue-400 transition">Contacts</a>
+        </div>
+    </header>
+    <div class="content-container container max-w-5xl mx-auto px-4 sm:px-6 my-4 sm:my-8">
+        <div class="bg-white rounded-2xl overflow-hidden">
+            <div class="bg-blue-600 text-white px-4 py-6 md:px-7 md:p-10">
+                <h2 class="text-3xl md:text-5xl flex items-center">
+                    <b>Contacts</b>
+                </h2>
+            </div>
+            <div class="space-y-4 md:py-5 md:px-4 py-3 px-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 px-3">
+                    <a href="#" id="phone-container" onclick="copy(event)" class="flex flex-col md:flex-row gap-4 items-center hover:bg-gray-100 p-4 rounded-lg transition cursor-pointer">
+                        <div class="w-20 h-20 flex items-center justify-center flex-shrink-0 rounded-xl border-2 border-gray-200">
+                            <i id="phone-icon" class="fas fa-phone text-blue-600 text-3xl"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-bold">Phone Number</h3>
+                            <p id="contact" class="text-gray-600">08xx-xxxx-xxxx</p>
+                        </div>
+                    </a>
+                    <a href="#" onclick="copy(event)" class="flex flex-col md:flex-row gap-4 items-center hover:bg-gray-100 p-4 rounded-lg transition">
+                        <div class="w-20 h-20 flex items-center justify-center flex-shrink-0 rounded-xl border-2 border-gray-200">
+                            <i class="fas fa-envelope text-black-600 text-3xl"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-bold">Email</h3>
+                            <p id="contact" class="text-gray-600">bglorychen@student.ciputra.ac.id</p>
+                        </div>
+                    </a>     
+                    <a href="https://www.linkedin.com/in/britney-glory-chen-31b28933b/" target="_blank" class="flex flex-col md:flex-row gap-4 items-center hover:bg-gray-100 p-4 rounded-lg transition">
+                        <div class="w-20 h-20 flex items-center justify-center flex-shrink-0 rounded-xl border-2 border-gray-200">
+                            <i class="fab fa-linkedin text-blue-600 text-3xl"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-bold">LinkedIn</h3>
+                            <p>Britney Glory Chen</p>
+                        </div>
+                    </a>   
+                    <a href="https://github.com/AquaX0" target="_blank" class="flex flex-col md:flex-row gap-4 items-center hover:bg-gray-100 p-4 rounded-lg transition">
+                        <div class="w-20 h-20 flex items-center justify-center flex-shrink-0 rounded-xl border-2 border-gray-200">
+                            <i class="fab fa-github text-gray-800 text-3xl"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-bold">Github</h3>
+                            <p>AquaX0</p>
+                        </div>
+                    </a>       
+                    <a href="https://www.instagram.com/britneygloryc?igsh=MWR5NTk0ZTh0dTZqMg==" target="_blank" class="flex flex-col md:flex-row gap-4 items-center hover:bg-gray-100 p-4 rounded-lg transition" id="instagram-item">
+                        <div class="w-20 h-20 flex items-center justify-center flex-shrink-0 rounded-xl border-2 border-gray-200">
+                            <i class="fab fa-instagram text-pink-500 text-3xl"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-bold">Instagram</h3>
+                            <p>@britneygloryc</p>
+                        </div>
+                    </a>   
+
+                </div>                          
+            </div>
+        </div>
+        <footer class="bg-gray-200 p-4 text-center text-sm text-gray-500 border-t border-gray-200 rounded-b-2xl">
+            <p>Designed with Tailwind CSS | © 2025 Britney Glory Chen</p>
+        </footer>
+    </div>
+    <script>
+        const phoneIcon = document.getElementById('phone-icon');
+        const phoneContainer = document.getElementById('phone-container');
+
+        phoneContainer.addEventListener('mouseenter', () => {
+            phoneIcon.classList.add('animate-shake', 'text-blue-400');
+        });
+
+        phoneContainer.addEventListener('mouseleave', () => {
+            phoneIcon.classList.remove('text-blue-400', 'animate-shake');
+        });
+    </script>
+    <script>
+        function copy(event) {
+            event.preventDefault(); 
+            const contact = document.getElementById("contact").textContent.trim();
+            navigator.clipboard.writeText(contact).then(() => {
+                alert("Copied to clipboard!");
+            }).catch(err => {
+                alert("Failed to copy Email.");
+                console.error(err);
+            });
+        }
+    </script>   
+    <script>
+        document.body.classList.remove('no-js');
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const transitionEl = document.createElement('div');
+            transitionEl.className = 'page-transition';
+            document.body.appendChild(transitionEl);
+            
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+                transitionEl.style.transform = 'translateY(-100%)';
+                setTimeout(() => {
+                    transitionEl.remove();
+                }, 1200); 
+            }, 50);
+        });
+        
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (link.href && link.href !== '#' && !link.href.includes('#')) {
+                    e.preventDefault();
+                    const transitionEl = document.createElement('div');
+                    transitionEl.className = 'page-transition';
+                    transitionEl.style.transform = 'translateY(100%)';
+                    document.body.appendChild(transitionEl);
+                    
+                    setTimeout(() => {
+                        transitionEl.style.transform = 'translateY(0)';
+                        setTimeout(() => {
+                            window.location.href = link.href;
+                        }, 1200); 
+                    }, 50);
+                }
+            });
+        });
+    </script>
+    <script>
+        document.body.classList.remove('no-js');
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const transitionEl = document.createElement('div');
+            transitionEl.className = 'page-transition';
+            document.body.appendChild(transitionEl);
+            
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+                transitionEl.style.transform = 'translateY(-100%)';
+                setTimeout(() => {
+                    transitionEl.remove();
+                }, 1200); 
+            }, 50);
+            
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('open');
+                mobileMenu.classList.toggle('active');
+            });
+            
+            document.querySelectorAll('#mobileMenu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('open');
+                    mobileMenu.classList.remove('active');
+                });
+            });
+        });
+        
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (link.href && link.href !== '#' && !link.href.includes('#')) {
+                    e.preventDefault();
+                    const transitionEl = document.createElement('div');
+                    transitionEl.className = 'page-transition';
+                    transitionEl.style.transform = 'translateY(100%)';
+                    document.body.appendChild(transitionEl);
+                    
+                    setTimeout(() => {
+                        transitionEl.style.transform = 'translateY(0)';
+                        setTimeout(() => {
+                            window.location.href = link.href;
+                        }, 1200); 
+                    }, 50);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
